@@ -9,7 +9,17 @@ import { useStore } from '../store/useStore';
 import { Volume2, HelpCircle, Check, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+const shuffleArray = (array) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 export const HearAndTypeModule = () => {
+  const [wordPool, setWordPool] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [inputValue, setInputValue] = useState('');
   const [status, setStatus] = useState('idle'); // 'idle', 'success', 'error'
@@ -20,7 +30,16 @@ export const HearAndTypeModule = () => {
   const navigate = useNavigate();
   const containerRef = React.useRef(null);
 
+  // Initialize and shuffle words on mount
   useEffect(() => {
+    // Take a random 20 words for each session
+    setWordPool(shuffleArray(simpleWords).slice(0, 20));
+  }, []);
+
+  const currentItem = wordPool[currentIndex];
+
+  useEffect(() => {
+    if (!currentItem) return;
     // Play audio when mounting or changing word
     if (containerRef.current) {
       containerRef.current.scrollTo(0, 0);
@@ -29,23 +48,21 @@ export const HearAndTypeModule = () => {
     if (inputRef.current) inputRef.current.focus();
     setInputValue('');
     setStatus('idle');
-  }, [currentIndex]);
-
-  const currentItem = simpleWords[currentIndex];
+  }, [currentIndex, currentItem]);
 
   const handleCheck = () => {
     if (inputValue.toLowerCase().trim() === currentItem.word.toLowerCase()) {
       setStatus('success');
       playAudio('Correct! Good job!');
       setTimeout(() => {
-        if (currentIndex < simpleWords.length - 1) {
+        if (currentIndex < wordPool.length - 1) {
           setCurrentIndex(prev => prev + 1);
         } else {
           const timeInSeconds = Math.floor((Date.now() - startTime) / 1000);
           addGameResult({
             moduleName: "Hear & Type",
-            score: simpleWords.length,
-            total: simpleWords.length,
+            score: wordPool.length,
+            total: wordPool.length,
             timeInSeconds
           });
           
@@ -68,16 +85,18 @@ export const HearAndTypeModule = () => {
     }
   };
 
+  if (!currentItem) return null;
+
   return (
     <div ref={containerRef} className="flex-1 flex flex-col items-center p-4 md:p-6 w-full max-w-2xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
       <div className="w-full mb-4 md:mb-8 shrink-0">
-        <ProgressBar current={currentIndex + 1} total={simpleWords.length} color="bg-brand-blue" />
+        <ProgressBar current={currentIndex + 1} total={wordPool.length} color="bg-brand-blue" />
       </div>
 
       <motion.div
         className="bg-white/90 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-4 md:p-8 pb-8 md:pb-12 shadow-2xl border-b-[8px] md:border-b-[10px] border-brand-blue w-full flex flex-col items-center flex-1 overflow-y-auto lg:overflow-visible"
       >
-        <div className="flex justify-between w-full mb-6">
+        <div className="flex justify-between w-full mb-6 shrink-0">
           <button 
             className="text-brand-dark/40 hover:text-brand-dark"
             onClick={() => alert(`Hint: ${currentItem.hint} - Starts with ${currentItem.word[0].toUpperCase()}`)}

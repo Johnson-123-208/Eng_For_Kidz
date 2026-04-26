@@ -9,7 +9,17 @@ import { playAudio } from '../utils/audio';
 import { Shield, Volume2, HelpCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+const shuffleArray = (array) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 export const ChallengeModule = () => {
+  const [quizPool, setQuizPool] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [status, setStatus] = useState('idle'); // idle, correct, wrong
@@ -20,11 +30,23 @@ export const ChallengeModule = () => {
   const navigate = useNavigate();
   const containerRef = React.useRef(null);
 
-  const currentQ = challengeQuiz[currentIndex];
+  // Initialize and shuffle quiz on mount
+  useEffect(() => {
+    // Take a random 20 questions for each challenge session to keep it fresh
+    const shuffled = shuffleArray(challengeQuiz).slice(0, 20);
+    setQuizPool(shuffled);
+  }, []);
+
+  const currentQ = quizPool[currentIndex];
+  const [shuffledOptions, setShuffledOptions] = useState([]);
 
   useEffect(() => {
+    if (!currentQ) return;
+    
     setSelectedOption(null);
     setStatus('idle');
+    setShuffledOptions(shuffleArray(currentQ.options));
+
     if (containerRef.current) {
       containerRef.current.scrollTo(0, 0);
     }
@@ -51,7 +73,7 @@ export const ChallengeModule = () => {
   };
 
   const nextQuestion = () => {
-    if (currentIndex < challengeQuiz.length - 1) {
+    if (currentIndex < quizPool.length - 1) {
       setCurrentIndex(prev => prev + 1);
     } else {
       const finalScore = score + 1; // including the last one contextually
@@ -60,17 +82,19 @@ export const ChallengeModule = () => {
       addGameResult({
         moduleName: "Master Challenge",
         score: finalScore,
-        total: challengeQuiz.length,
+        total: quizPool.length,
         timeInSeconds
       });
       
-      const starsEarned = finalScore === challengeQuiz.length ? 3 : finalScore >= challengeQuiz.length - 2 ? 2 : 1;
+      const starsEarned = finalScore === quizPool.length ? 3 : finalScore >= quizPool.length - 2 ? 2 : 1;
       addXp(200);
       addStars(starsEarned);
       markModuleComplete('challenge');
       setShowReward(true);
     }
   };
+
+  if (!currentQ) return null;
 
   const renderQuestionHeader = () => {
     switch(currentQ.questionType) {
@@ -152,7 +176,7 @@ export const ChallengeModule = () => {
     <div ref={containerRef} className="flex-1 flex flex-col items-center p-4 md:p-6 w-full max-w-3xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
       <div className="w-full flex items-center mb-4 md:mb-8 gap-4 shrink-0">
         <Shield className="text-brand-yellow fill-brand-yellow" size={32} />
-        <ProgressBar current={currentIndex + 1} total={challengeQuiz.length} color="bg-brand-yellow" />
+        <ProgressBar current={currentIndex + 1} total={quizPool.length} color="bg-brand-yellow" />
       </div>
 
       <AnimatePresence mode="wait">
@@ -166,7 +190,7 @@ export const ChallengeModule = () => {
           {renderQuestionHeader()}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mt-auto">
-            {currentQ.options.map((option, idx) => {
+            {shuffledOptions.map((option, idx) => {
               const isSelected = selectedOption === option;
               const isCorrect = option === currentQ.correct;
               
