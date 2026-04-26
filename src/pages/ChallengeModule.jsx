@@ -63,37 +63,70 @@ export const ChallengeModule = () => {
       case 'hear':
         return (
           <>
-            <h2 className="text-3xl text-brand-dark mb-4">Listen and choose the word!</h2>
+            <h2 className="text-xl md:text-3xl text-brand-dark mb-4">Listen and choose the word!</h2>
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => playAudio(currentQ.word)}
-              className="w-24 h-24 rounded-full bg-brand-yellow text-brand-dark flex items-center justify-center shadow-[0_6px_0_#E6B048] border-4 border-white mb-6"
+              className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-brand-yellow text-brand-dark flex items-center justify-center shadow-[0_4px_0_#E6B048] md:shadow-[0_6px_0_#E6B048] border-4 border-white mb-4 md:mb-6"
             >
-              <Volume2 size={48} />
+              <Volume2 size={36} className="md:w-12 md:h-12" />
             </motion.button>
           </>
         );
       case 'phonic':
         return (
           <>
-            <h2 className="text-3xl text-brand-dark mb-4">Which word has the sound:</h2>
-            <div className="text-6xl text-brand-purple font-heading mb-6">{currentQ.sound}</div>
+            <h2 className="text-xl md:text-3xl text-brand-dark mb-4">Which word has the sound:</h2>
+            <div className="text-4xl md:text-6xl text-brand-purple font-heading mb-4 md:mb-6">{currentQ.sound}</div>
           </>
         );
       case 'missing':
         return (
           <>
-            <h2 className="text-3xl text-brand-dark mb-4">Find the missing sound!</h2>
-            <div className="text-7xl text-brand-dark font-heading mb-2 tracking-widest">{currentQ.word.replace('_', ' _ ')}</div>
-            <div className="text-5xl mb-6">{currentQ.hint}</div>
+            <h2 className="text-xl md:text-3xl text-brand-dark mb-4">Find the missing sound!</h2>
+            <div className="text-5xl md:text-7xl text-brand-dark font-heading mb-2 tracking-widest">{currentQ.word.replace('_', ' _ ')}</div>
+            <div className="text-4xl md:text-5xl mb-4 md:mb-6">{currentQ.hint}</div>
           </>
         );
       case 'image':
         return (
           <>
-            <h2 className="text-3xl text-brand-dark mb-4">Choose the correct spelling!</h2>
-            <div className="text-8xl mb-6">{currentQ.hint}</div>
+            <h2 className="text-xl md:text-3xl text-brand-dark mb-4">Choose the correct spelling!</h2>
+            <div className="text-6xl md:text-8xl mb-4 md:mb-6">{currentQ.hint}</div>
+          </>
+        );
+      case 'rhyme':
+        return (
+          <>
+            <h2 className="text-xl md:text-3xl text-brand-dark mb-4">What rhymes with...</h2>
+            <div className="text-4xl md:text-6xl text-brand-blue font-heading mb-4 md:mb-6 capitalize">{currentQ.word}</div>
+          </>
+        );
+      case 'build':
+        return (
+          <>
+            <h2 className="text-xl md:text-3xl text-brand-dark mb-4">Combine the sounds!</h2>
+            <div className="flex gap-2 md:gap-4 mb-2">
+              {currentQ.sounds.map((sound, i) => (
+                <div key={i} className="bg-brand-blue/10 px-3 py-2 md:px-6 md:py-4 rounded-xl text-3xl md:text-5xl font-heading text-brand-blue">{sound}</div>
+              ))}
+            </div>
+            <div className="text-4xl md:text-6xl mb-4 md:mb-6">{currentQ.hint}</div>
+          </>
+        );
+      case 'sight':
+        return (
+          <>
+            <h2 className="text-xl md:text-3xl text-brand-dark mb-4">Find the sight word!</h2>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => playAudio(currentQ.word)}
+              className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-brand-green text-white flex items-center justify-center shadow-[0_4px_0_#439A5D] md:shadow-[0_6px_0_#439A5D] border-4 border-white mb-4 md:mb-6"
+            >
+              <Volume2 size={36} className="md:w-12 md:h-12" />
+            </motion.button>
           </>
         );
       default:
