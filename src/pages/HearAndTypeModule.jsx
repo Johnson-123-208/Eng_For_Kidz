@@ -14,8 +14,9 @@ export const HearAndTypeModule = () => {
   const [inputValue, setInputValue] = useState('');
   const [status, setStatus] = useState('idle'); // 'idle', 'success', 'error'
   const [showReward, setShowReward] = useState(false);
+  const [startTime] = useState(Date.now());
   const inputRef = useRef(null);
-  const { addXp, addStars, markModuleComplete } = useStore();
+  const { addXp, addStars, markModuleComplete, addGameResult } = useStore();
   const navigate = useNavigate();
   const containerRef = React.useRef(null);
 
@@ -40,6 +41,14 @@ export const HearAndTypeModule = () => {
         if (currentIndex < simpleWords.length - 1) {
           setCurrentIndex(prev => prev + 1);
         } else {
+          const timeInSeconds = Math.floor((Date.now() - startTime) / 1000);
+          addGameResult({
+            moduleName: "Hear & Type",
+            score: simpleWords.length,
+            total: simpleWords.length,
+            timeInSeconds
+          });
+          
           addXp(100);
           addStars(3);
           markModuleComplete('hear-type');

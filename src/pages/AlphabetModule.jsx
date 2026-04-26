@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { alphabets } from '../data/dummyData';
 import { WordCard } from '../components/WordCard';
@@ -12,7 +12,8 @@ import { useNavigate } from 'react-router-dom';
 export const AlphabetModule = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showReward, setShowReward] = useState(false);
-  const { addXp, addStars, markModuleComplete } = useStore();
+  const [startTime] = useState(Date.now());
+  const { addXp, addStars, markModuleComplete, addGameResult } = useStore();
   const navigate = useNavigate();
   const containerRef = React.useRef(null);
 
@@ -26,7 +27,14 @@ export const AlphabetModule = () => {
     if (currentIndex < alphabets.length - 1) {
       setCurrentIndex(prev => prev + 1);
     } else {
-      // Completed module
+      const timeInSeconds = Math.floor((Date.now() - startTime) / 1000);
+      addGameResult({
+        moduleName: "Alphabet Sounds",
+        score: alphabets.length,
+        total: alphabets.length,
+        timeInSeconds
+      });
+      
       addXp(50);
       addStars(3);
       markModuleComplete('alphabets');

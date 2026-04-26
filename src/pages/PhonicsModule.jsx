@@ -13,7 +13,8 @@ import { useNavigate } from 'react-router-dom';
 export const PhonicsModule = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showReward, setShowReward] = useState(false);
-  const { addXp, addStars, markModuleComplete } = useStore();
+  const [startTime] = useState(Date.now());
+  const { addXp, addStars, markModuleComplete, addGameResult } = useStore();
   const navigate = useNavigate();
   const containerRef = React.useRef(null);
 
@@ -27,6 +28,14 @@ export const PhonicsModule = () => {
     if (currentIndex < digraphs.length - 1) {
       setCurrentIndex(prev => prev + 1);
     } else {
+      const timeInSeconds = Math.floor((Date.now() - startTime) / 1000);
+      addGameResult({
+        moduleName: "Magic Phonics",
+        score: digraphs.length,
+        total: digraphs.length,
+        timeInSeconds
+      });
+      
       addXp(100);
       addStars(3);
       markModuleComplete('phonics');

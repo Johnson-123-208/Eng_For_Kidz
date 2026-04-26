@@ -10,14 +10,19 @@ export const useStore = create(
       streak: 0,
       lastLoginDate: null,
       completedModules: [],
+      gameHistory: [], // Stores { moduleName, score, total, timeInSeconds, timestamp }
       
-      addXp: (amount) => {
-        set((state) => {
-          const newXp = state.xp + amount;
-          const newLevel = Math.floor(newXp / 100) + 1;
-          return { xp: newXp, level: newLevel };
-        });
-      },
+      addGameResult: (result) => set((state) => ({
+        gameHistory: [
+          { ...result, timestamp: new Date().toISOString() },
+          ...state.gameHistory.slice(0, 49) // Keep last 50 results
+        ]
+      })),
+      addXp: (amount) => set((state) => {
+        const newXp = state.xp + amount;
+        const newLevel = Math.floor(newXp / 100) + 1;
+        return { xp: newXp, level: newLevel };
+      }),
       
       addStars: (amount) => set((state) => ({ stars: state.stars + amount })),
       

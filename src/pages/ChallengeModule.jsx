@@ -15,7 +15,8 @@ export const ChallengeModule = () => {
   const [status, setStatus] = useState('idle'); // idle, correct, wrong
   const [score, setScore] = useState(0);
   const [showReward, setShowReward] = useState(false);
-  const { addXp, addStars, markModuleComplete } = useStore();
+  const [startTime] = useState(Date.now());
+  const { addXp, addStars, markModuleComplete, addGameResult } = useStore();
   const navigate = useNavigate();
   const containerRef = React.useRef(null);
 
@@ -54,6 +55,15 @@ export const ChallengeModule = () => {
       setCurrentIndex(prev => prev + 1);
     } else {
       const finalScore = score + 1; // including the last one contextually
+      const timeInSeconds = Math.floor((Date.now() - startTime) / 1000);
+      
+      addGameResult({
+        moduleName: "Master Challenge",
+        score: finalScore,
+        total: challengeQuiz.length,
+        timeInSeconds
+      });
+      
       const starsEarned = finalScore === challengeQuiz.length ? 3 : finalScore >= challengeQuiz.length - 2 ? 2 : 1;
       addXp(200);
       addStars(starsEarned);

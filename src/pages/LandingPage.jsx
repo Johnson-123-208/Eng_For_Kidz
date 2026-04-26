@@ -81,9 +81,6 @@ export const LandingPage = () => {
           Welcome to your magic phonics fun! <br className="hidden md:block" />
           Choose a game below to start playing and learning!
         </p>
-        <div className="mt-4 text-brand-red font-heading italic opacity-80">
-          Created with love by your brother ❤️
-        </div>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl pb-16">
