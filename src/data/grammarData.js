@@ -151,6 +151,9 @@ export const learningContent = {
     { title: 'Semicolons', rule: "A Semicolon joins two related sentences.", details: "Stronger than a comma, weaker than a period.", examples: ["I love ice cream; it is sweet."] }
   ],
   'prepositions': [
-    { title: 'Position', rule: "Prepositions show 'Location'.", details: "They tell us the relationship between objects.", examples: ["In the box", "On the table", "Beside the car", "Under the bed"] }
+    { title: 'What is a Preposition?', rule: "Prepositions show 'Where' or 'When'.", details: "They connect a noun to the rest of the sentence to show position, time, or direction.", examples: ["Behind", "Across", "During", "Between"] },
+    { title: 'In, On, At', rule: "Use 'In' for spaces, 'On' for surfaces.", details: "In the room, On the table, At the door.", examples: ["In the box", "On the wall", "At the park"] },
+    { title: 'Beside & Between', rule: "Beside means 'next to'.", details: "Between means in the middle of two things.", examples: ["Sit beside me", "Between two trees"] },
+    { title: 'Under & Above', rule: "Under means 'below'.", details: "Above means 'higher than'.", examples: ["Under the bed", "Above the clouds"] }
   ]
 };

@@ -121,6 +121,7 @@ export const SpellBuilderModule = () => {
                 value={letter}
                 disabled={isCorrect}
                 className="shrink-0"
+                style={{ touchAction: 'none' }}
               >
                 <div className={`
                   w-14 h-14 sm:w-20 sm:h-20 flex items-center justify-center text-3xl sm:text-4xl font-heading rounded-2xl shadow-lg border-b-8 cursor-grab active:cursor-grabbing
