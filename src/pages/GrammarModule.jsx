@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { grammarModules, learningContent } from '../data/grammarData';
 import { AnimatedButton } from '../components/AnimatedButton';
 import { ProgressBar } from '../components/ProgressBar';
@@ -9,6 +10,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Book, CheckCircle, HelpCircle, ArrowRight, ArrowLeft } from 'lucide-react';
 
 const shuffleArray = (array) => {
+  if (!array || !Array.isArray(array)) return [];
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -39,7 +41,7 @@ export const GrammarModule = () => {
 
   useEffect(() => {
     if (moduleData) {
-      const pool = moduleData.lessons[0].quizPool || [];
+      const pool = moduleData.lessons?.[0]?.quizPool || [];
       setQuizPool(shuffleArray(pool).slice(0, 20));
     }
   }, [moduleData]);
@@ -116,6 +118,7 @@ export const GrammarModule = () => {
 
   if (mode === 'learn') {
     const card = learnCards[learnIndex];
+    if (!card) return null;
     return (
       <div ref={containerRef} className="flex-1 flex flex-col items-center p-4 md:p-12 w-full max-w-4xl mx-auto min-h-screen overflow-y-auto">
         <div className="w-full flex items-center justify-between mb-8">
@@ -142,11 +145,11 @@ export const GrammarModule = () => {
                 <div className="text-xl text-brand-dark/70 mb-8 italic">"{card.details}"</div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                   {card.examples.map((ex, i) => (
+                   {card?.examples?.map((ex, i) => (
                        <div key={i} className="bg-gray-50 p-4 rounded-2xl text-center font-bold text-brand-blue border-b-4 border-gray-200">
                            {ex}
                        </div>
-                   ))}
+                   )) || <div className="col-span-full py-8 text-gray-400">Loading examples...</div>}
                 </div>
 
                 <div className="flex gap-4">
@@ -175,6 +178,8 @@ export const GrammarModule = () => {
     );
   }
 
+  if (!currentQ || !currentQ.options) return null;
+
   return (
     <div ref={containerRef} className="flex-1 flex flex-col items-center p-1 md:p-6 w-full max-w-3xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
       <div className="w-full flex items-center mb-2 md:mb-8 gap-4 px-2 shrink-0">
@@ -200,7 +205,7 @@ export const GrammarModule = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full shrink-0">
-            {shuffledOptions.map((option, idx) => {
+            {shuffledOptions?.map((option, idx) => {
               const isSelected = selectedOption === option;
               const isCorrect = option === currentQ.a;
               let variant = "secondary";
@@ -229,9 +234,6 @@ export const GrammarModule = () => {
         message={`Vedhanshi is a Grammar Guru!`}
         stars={3}
       />
-    </div>
-  );
-};
     </div>
   );
 };

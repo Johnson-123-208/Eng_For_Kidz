@@ -9,47 +9,53 @@ export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isHome = location.pathname === '/';
-  const isStats = location.pathname === '/stats';
 
   return (
-    <header className="px-6 py-4 flex items-center justify-between bg-white/50 backdrop-blur-md border-b border-white/40 sticky top-0 z-40">
-      <div 
-        className="flex items-center gap-2 cursor-pointer"
-        onClick={() => !isHome && navigate('/')}
-      >
-        <div className="bg-brand-red text-white p-2 rounded-xl rotate-3">
-          <span className="text-2xl font-heading">A</span>
-        </div>
-        <div className="bg-brand-blue text-white p-2 rounded-xl -rotate-3">
-          <span className="text-2xl font-heading">B</span>
-        </div>
-        <div className="bg-brand-yellow text-brand-dark p-2 rounded-xl rotate-6">
-          <span className="text-2xl font-heading">C</span>
-        </div>
-        <div className="ml-3 hidden md:flex flex-col">
-          <span className="text-xs font-bold text-brand-purple tracking-widest uppercase opacity-70">Vedhanshi's</span>
-          <span className="font-heading text-xl md:text-2xl text-brand-dark leading-tight">Phonics Fun</span>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-3 md:gap-6">
-        {!isStats && (
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => navigate('/stats')}
-            className="hidden md:flex items-center gap-1 bg-white px-3 py-1.5 rounded-full shadow-sm border border-brand-purple/30 group"
-          >
-            <BarChart3 className="text-brand-purple group-hover:scale-110 transition-transform" size={20} />
-            <span className="font-bold text-brand-dark">Stats</span>
-          </motion.button>
-        )}
+    <header className="sticky top-0 z-50 w-full px-4 md:px-8 py-3 md:py-4 transition-all glass border-b-0">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
         
-        <motion.div whileHover={{ scale: 1.1 }} className="hidden md:flex items-center gap-1 bg-white px-3 py-1.5 rounded-full shadow-sm border border-brand-yellow/30">
-          <Star className="text-brand-yellow fill-brand-yellow" size={20} />
-          <span className="font-bold text-brand-dark">{stars}</span>
+        {/* Logo / Title */}
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => navigate('/')}
+        >
+          <div className="bg-brand-blue p-2 rounded-xl text-white shadow-lg shadow-brand-blue/20">
+             <Star size={24} fill="currentColor" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-2xl md:text-3xl font-heading font-extrabold text-brand-dark tracking-tight leading-none">
+              Phonics Fun!
+            </span>
+            {/* Show name tag on desktop only */}
+            <span className="hidden md:block text-xs font-bold text-brand-blue tracking-[0.2em] uppercase opacity-70">
+              For Vedhanshi
+            </span>
+          </div>
         </motion.div>
+
+        {/* Action Icons */}
+        <div className="flex items-center gap-2 md:gap-4">
+          
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            onClick={() => navigate('/stats')}
+            className="flex items-center gap-2 bg-brand-purple/10 hover:bg-brand-purple/20 px-3 md:px-4 py-2 rounded-2xl cursor-pointer transition-all border border-brand-purple/20"
+          >
+            <BarChart3 size={20} className="text-brand-purple" />
+            <span className="text-brand-purple font-bold text-sm md:text-base">{stars} ⭐️</span>
+          </motion.div>
+
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-2 bg-brand-green/10 px-3 md:px-4 py-2 rounded-2xl border border-brand-green/20"
+          >
+            <Zap size={20} className="text-brand-green fill-brand-green/20" />
+            <span className="text-brand-green font-bold text-sm md:text-base">{xp} XP</span>
+          </motion.div>
+
+        </div>
       </div>
     </header>
   );

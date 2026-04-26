@@ -126,31 +126,48 @@ export const LandingPage = () => {
   ];
 
   return (
-    <div className="flex-1 flex flex-col p-6 items-center">
-      <motion.div 
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="text-center my-8"
-      >
-        <h1 className="text-5xl md:text-6xl text-brand-purple drop-shadow-md mb-4 flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
-          <div className="flex items-center gap-4">
-            <span className="inline-block animate-bounce">👋</span> 
-            Hi Vedhanshi!
+    <div className="flex-1 flex flex-col items-center bg-pattern">
+      
+      {/* Premium Hero Section */}
+      <section className="w-full max-w-7xl px-6 pt-12 pb-16 text-center relative overflow-hidden">
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="relative z-10"
+        >
+          <div className="inline-block glass px-6 py-2 rounded-full text-brand-blue font-bold tracking-[0.2em] uppercase text-xs mb-6 shadow-lg">
+             ✨ Let's Learn & Play
           </div>
-        </h1>
-        <p className="text-xl md:text-2xl text-brand-dark/70 font-medium max-w-2xl mx-auto leading-relaxed">
-          Welcome to your magic phonics fun! <br className="hidden md:block" />
-          Choose a game below to start playing and learning!
-        </p>
-      </motion.div>
+          
+          <h1 className="text-5xl md:text-7xl font-heading font-black text-brand-dark mb-6 leading-tight">
+            Hi Vedhanshi!<br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-purple">
+              Choose Your Adventure
+            </span>
+          </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl pb-16">
+          <p className="text-lg md:text-xl text-brand-dark/60 font-medium max-w-2xl mx-auto leading-relaxed">
+            Welcome to your magical world of learning. <br className="hidden md:block" />
+            Pick a game below and let the fun begin! 🎈
+          </p>
+        </motion.div>
+
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-purple/5 rounded-full blur-3xl" />
+        </div>
+      </section>
+
+      {/* Grid Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl px-6 pb-24">
         {modules.map((mod, i) => (
           <motion.div
             key={mod.id}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
+            className="group"
           >
             <ModuleCard {...mod} />
           </motion.div>
