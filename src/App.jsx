@@ -8,6 +8,8 @@ import { SpellBuilderModule } from './pages/SpellBuilderModule';
 import { PhonicsModule } from './pages/PhonicsModule';
 import { ChallengeModule } from './pages/ChallengeModule';
 import { StatsPage } from './pages/StatsPage';
+import { MathTablesModule } from './pages/MathTablesModule';
+import { MathQuizModule } from './pages/MathQuizModule';
 
 const AppLayout = () => {
   return (
@@ -29,6 +31,8 @@ export function App() {
           <Route path="module/spell-builder" element={<SpellBuilderModule />} />
           <Route path="module/phonics" element={<PhonicsModule />} />
           <Route path="module/challenge" element={<ChallengeModule />} />
+          <Route path="module/math-tables" element={<MathTablesModule />} />
+          <Route path="module/math-quiz" element={<MathQuizModule />} />
           <Route path="stats" element={<StatsPage />} />
         </Route>
       </Routes>

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ModuleCard } from '../components/ModuleCard';
 import { useStore } from '../store/useStore';
-import { BookOpen, Headphones, Type, Shield, Trophy } from 'lucide-react';
+import { BookOpen, Headphones, Type, Shield, Trophy, Calculator, TableProperties } from 'lucide-react';
 
 export const LandingPage = () => {
   const { xp, completedModules, updateLoginStreak } = useStore();
@@ -61,6 +61,26 @@ export const LandingPage = () => {
       isLocked: false,
       path: '/module/challenge',
       stars: completedModules.includes('challenge') ? 3 : 0,
+    },
+    {
+      id: 'math-tables',
+      title: 'Tables Master',
+      description: 'Learn tables from 2 to 20!',
+      icon: <TableProperties className="text-white" size={40} />,
+      color: 'bg-brand-blue',
+      isLocked: false,
+      path: '/module/math-tables',
+      stars: completedModules.includes('math-tables') ? 3 : 0,
+    },
+    {
+      id: 'math-quiz',
+      title: 'Math Quiz',
+      description: 'Solve fun addition and subtraction quizes!',
+      icon: <Calculator className="text-white" size={40} />,
+      color: 'bg-brand-purple',
+      isLocked: false,
+      path: '/module/math-quiz',
+      stars: completedModules.includes('math-quiz') ? 3 : 0,
     }
   ];
 

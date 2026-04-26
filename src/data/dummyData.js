@@ -955,3 +955,41 @@ export const challengeQuiz = [
   { questionType: 'sight', word: "mother", options: ["mutha", "muther", "mother", "mothir"], correct: "mother" },
   { questionType: 'sight', word: "father", options: ["fatha", "father", "father", "fathir"], correct: "father" }
 ];
+
+export const mathTables = Array.from({ length: 19 }, (_, i) => {
+  const num = i + 2;
+  return {
+    number: num,
+    values: Array.from({ length: 10 }, (_, j) => ({
+      multiplier: j + 1,
+      result: num * (j + 1)
+    }))
+  };
+});
+
+export const mathQuizPool = [
+  // Addition
+  { type: 'add', q: "2 + 3", a: 5, options: [4, 5, 6, 7] },
+  { type: 'add', q: "5 + 5", a: 10, options: [9, 10, 11, 12] },
+  { type: 'add', q: "7 + 2", a: 9, options: [8, 9, 10, 7] },
+  { type: 'add', q: "4 + 6", a: 10, options: [10, 11, 9, 12] },
+  { type: 'add', q: "8 + 3", a: 11, options: [10, 11, 12, 13] },
+  { type: 'add', q: "9 + 5", a: 14, options: [13, 14, 15, 16] },
+  { type: 'add', q: "12 + 4", a: 16, options: [15, 16, 17, 18] },
+  { type: 'add', q: "15 + 5", a: 20, options: [19, 20, 21, 22] },
+  // Subtraction
+  { type: 'sub', q: "5 - 2", a: 3, options: [2, 3, 4, 1] },
+  { type: 'sub', q: "10 - 4", a: 6, options: [5, 6, 7, 4] },
+  { type: 'sub', q: "8 - 3", a: 5, options: [4, 5, 6, 3] },
+  { type: 'sub', q: "15 - 5", a: 10, options: [9, 10, 11, 8] },
+  { type: 'sub', q: "20 - 7", a: 13, options: [12, 13, 14, 11] },
+  { type: 'sub', q: "12 - 6", a: 6, options: [5, 6, 7, 4] },
+  { type: 'sub', q: "18 - 9", a: 9, options: [8, 9, 10, 7] },
+  // Multiplication
+  { type: 'mul', q: "2 x 3", a: 6, options: [4, 5, 6, 8] },
+  { type: 'mul', q: "5 x 2", a: 10, options: [8, 10, 12, 15] },
+  { type: 'mul', q: "3 x 4", a: 12, options: [10, 11, 12, 14] },
+  { type: 'mul', q: "4 x 5", a: 20, options: [15, 20, 25, 30] },
+  { type: 'mul', q: "6 x 2", a: 12, options: [10, 12, 14, 16] },
+  { type: 'mul', q: "10 x 3", a: 30, options: [20, 30, 40, 50] }
+];
