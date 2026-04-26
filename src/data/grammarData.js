@@ -102,24 +102,55 @@ export const grammarModules = [
           { q: "Which mark for a list? 'Prepare these items_ pen, paper, and ink.'", a: ":", options: [",", ";", ":", "-"] },
           { q: "Where does the comma go? 'If it rains_ we will stay home.'", a: "After 'rains'", options: ["After 'If'", "After 'rains'", "After 'we'", "No comma"] },
           { q: "Identify the mark in 'John's car':", a: "Apostrophe", options: ["Comma", "Apostrophe", "Hyphen", "Dash"] },
-          { q: "End this sentence: 'Can you hear me_'", a: "?", options: [".", "?", "!", ","] },
-          { q: "Quotation marks: 'She said_ I am tired._ '", a: ", ' '", options: [", ' '", ". ' '", ": ' '", "; ' '"] },
-          { q: "Which mark for excitement? 'Wow_ what a goal.'", a: "!", options: [".", "?", "!", ","] },
-          { q: "Join two sentences: 'I am tired_ however_ I will finish.'", a: "; ,", options: [", ,", "; ,", ". .", ": :"] },
-          { q: "Identify the mark: 'A long-term goal.'", a: "Hyphen", options: ["Dash", "Hyphen", "Underscore", "Tilde"] },
-          { q: "Proper noun comma: 'Paris_ France is beautiful.'", a: ",", options: [",", ";", ":", "."] },
-          { q: "Direct speech: 'I am hungry_ said Sam.'", a: ",", options: [",", ".", "?", "!"] },
-          { q: "Address comma: 'New York_ NY.'", a: ",", options: [",", ";", ":", "."] },
-          { q: "Date comma: 'May 5_ 2024.'", a: ",", options: [",", ";", ":", "."] },
-          { q: "Greeting comma: 'Dear Sam_'", a: ",", options: [",", ";", ":", "!"] },
-          { q: "Closing comma: 'Sincerely_'", a: ",", options: [",", ";", ":", "."] },
-          { q: "Parenthesis use: 'He (Sam) is my friend.' Name the mark:", a: "Parenthesis", options: ["Bracket", "Parenthesis", "Brace", "Slash"] },
-          { q: "Semicolon use: 'I love cats_ they are so cute.'", a: ";", options: [",", ";", ":", "."] },
-          { q: "Identify the ellipsis:", a: "...", options: ["---", "...", ":::", ",,,"] },
-          { q: "Possessive plural: 'The dogs_ toys are here.'", a: "'", options: ["s'", "'s", "'", "s"] },
-          { q: "Correct use: 'It_s raining.'", a: "'", options: ["s'", "'s", "'", "s"] }
+          { q: "End this sentence: 'Can you hear me_'", a: "?", options: [".", "?", "!", ","] }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'prepositions',
+    title: 'Prepositions',
+    icon: '📍',
+    color: 'bg-brand-yellow',
+    description: 'Where is it? (In, On, Under, Beside)',
+    lessons: [
+      {
+        type: 'basics',
+        title: 'Positional Words',
+        rules: 'Prepositions tell us where something is located.',
+        quizPool: [
+          { q: "The apple is ___ the table.", a: "on", options: ["on", "in", "under", "beside"] },
+          { q: "The ball is ___ the box.", a: "inside", options: ["inside", "on", "behind", "with"] },
+          { q: "Stand ___ your friend.", a: "beside", options: ["under", "beside", "in", "above"] },
+          { q: "The cat is hiding ___ the bed.", a: "under", options: ["on", "under", "above", "in"] },
+          { q: "The birds are flying ___ the tree.", a: "above", options: ["in", "on", "above", "under"] },
+          { q: "The keys are ___ the drawer.", a: "in", options: ["in", "on", "above", "to"] },
+          { q: "He walked ___ the door.", a: "through", options: ["on", "through", "under", "above"] },
+          { q: "Sit ___ the chair.", a: "on", options: ["on", "in", "at", "under"] },
+          { q: "We walked ___ the park.", a: "to", options: ["to", "on", "in", "at"] },
+          { q: "Lunch is ___ the bag.", a: "inside", options: ["on", "inside", "under", "beside"] }
         ]
       }
     ]
   }
 ];
+
+// Content for the Learn Mode
+export const learningContent = {
+  'parts-of-speech': [
+    { title: 'Nouns', rule: "A Noun is a 'Naming Word'.", details: "It names people (Dr. Sam), places (Library), things (Pencil), and ideas (Love).", examples: ["Paris", "Apple", "Happiness", "Teacher"] },
+    { title: 'Verbs', rule: "A Verb is an 'Action Word'.", details: "It tells what someone or something is doing.", examples: ["Running", "Think", "Sing", "Jump"] },
+    { title: 'Adjectives', rule: "An Adjective 'Describes' a Noun.", details: "It tells us more about the size, color, or shape.", examples: ["Beautiful", "Large", "Green", "Fast"] }
+  ],
+  'articles': [
+    { title: 'A vs An', rule: "Use 'An' for Vowel Sounds.", details: "A, E, I, O, U are vowels. (An Apple, An Hour). Use 'A' for everything else.", examples: ["A Car", "An Elephant", "A University", "An Honor"] },
+    { title: 'The', rule: "Use 'The' for Specific Things.", details: "When we talk about something unique or already mentioned.", examples: ["The Moon", "The President", "The Atlantic"] }
+  ],
+  'punctuations': [
+    { title: 'Commas', rule: "Use Commas to take a short breath.", details: "Used in lists or to separate parts of a sentence.", examples: ["Red, Blue, Green", "If I run, I win."] },
+    { title: 'Semicolons', rule: "A Semicolon joins two related sentences.", details: "Stronger than a comma, weaker than a period.", examples: ["I love ice cream; it is sweet."] }
+  ],
+  'prepositions': [
+    { title: 'Position', rule: "Prepositions show 'Location'.", details: "They tell us the relationship between objects.", examples: ["In the box", "On the table", "Beside the car", "Under the bed"] }
+  ]
+};

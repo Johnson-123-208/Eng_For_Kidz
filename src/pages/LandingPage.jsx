@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ModuleCard } from '../components/ModuleCard';
 import { useStore } from '../store/useStore';
-import { BookOpen, Headphones, Type, Shield, Trophy, Calculator, TableProperties } from 'lucide-react';
+import { BookOpen, Headphones, Type, Shield, Trophy, Calculator, TableProperties, MapPin } from 'lucide-react';
 
 export const LandingPage = () => {
   const { xp, completedModules, updateLoginStreak } = useStore();
@@ -112,6 +112,16 @@ export const LandingPage = () => {
       isLocked: false,
       path: '/module/grammar/punctuations',
       stars: completedModules.includes('punctuations') ? 3 : 0,
+    },
+    {
+      id: 'prepositions',
+      title: 'Prepositions',
+      description: 'Learn In, On, Under, Beside!',
+      icon: <MapPin className="text-white" size={40} />,
+      color: 'bg-brand-yellow',
+      isLocked: false,
+      path: '/module/grammar/prepositions',
+      stars: completedModules.includes('prepositions') ? 3 : 0,
     }
   ];
 
