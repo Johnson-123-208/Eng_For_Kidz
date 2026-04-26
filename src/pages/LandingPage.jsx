@@ -81,6 +81,37 @@ export const LandingPage = () => {
       isLocked: false,
       path: '/module/math-quiz',
       stars: completedModules.includes('math-quiz') ? 3 : 0,
+    },
+    // Grammar Section
+    {
+      id: 'parts-of-speech',
+      title: 'Parts of Speech',
+      description: 'Master Nouns, Verbs, and Adjectives!',
+      icon: <BookOpen className="text-white" size={40} />,
+      color: 'bg-brand-blue',
+      isLocked: false,
+      path: '/module/grammar/parts-of-speech',
+      stars: completedModules.includes('parts-of-speech') ? 3 : 0,
+    },
+    {
+      id: 'articles',
+      title: 'Article Master',
+      description: 'Master the usage of A, An, and The.',
+      icon: <Type className="text-white" size={40} />,
+      color: 'bg-brand-green',
+      isLocked: false,
+      path: '/module/grammar/articles',
+      stars: completedModules.includes('articles') ? 3 : 0,
+    },
+    {
+      id: 'punctuations',
+      title: 'Punctuation Lab',
+      description: 'Learn commas, periods, and more!',
+      icon: <Shield className="text-white" size={40} />,
+      color: 'bg-brand-red',
+      isLocked: false,
+      path: '/module/grammar/punctuations',
+      stars: completedModules.includes('punctuations') ? 3 : 0,
     }
   ];
 

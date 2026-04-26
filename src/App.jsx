@@ -10,6 +10,7 @@ import { ChallengeModule } from './pages/ChallengeModule';
 import { StatsPage } from './pages/StatsPage';
 import { MathTablesModule } from './pages/MathTablesModule';
 import { MathQuizModule } from './pages/MathQuizModule';
+import { GrammarModule } from './pages/GrammarModule';
 
 const AppLayout = () => {
   return (
@@ -33,6 +34,7 @@ export function App() {
           <Route path="module/challenge" element={<ChallengeModule />} />
           <Route path="module/math-tables" element={<MathTablesModule />} />
           <Route path="module/math-quiz" element={<MathQuizModule />} />
+          <Route path="module/grammar/:moduleId" element={<GrammarModule />} />
           <Route path="stats" element={<StatsPage />} />
         </Route>
       </Routes>

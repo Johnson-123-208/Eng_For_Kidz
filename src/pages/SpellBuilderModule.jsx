@@ -38,6 +38,7 @@ export const SpellBuilderModule = () => {
   const currentItem = wordPool[currentIndex];
 
   const initializeLetters = () => {
+    if (!currentItem) return;
     const wordLetters = currentItem.word.split('').map((char, index) => ({
       id: `${char}-${index}`,
       char
@@ -48,11 +49,13 @@ export const SpellBuilderModule = () => {
   };
 
   useEffect(() => {
-    initializeLetters();
-    if (containerRef.current) {
-      containerRef.current.scrollTo(0, 0);
+    if (currentItem) {
+      initializeLetters();
+      if (containerRef.current) {
+        containerRef.current.scrollTo(0, 0);
+      }
     }
-  }, [currentIndex]);
+  }, [currentIndex, currentItem]);
 
   const checkOrder = (newOrder) => {
     setLetters(newOrder);
