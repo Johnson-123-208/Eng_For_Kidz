@@ -27,7 +27,7 @@ export const MathQuizModule = () => {
   const [showReward, setShowReward] = useState(false);
   const [startTime] = useState(Date.now());
   const [shuffledOptions, setShuffledOptions] = useState([]);
-  
+
   const { addXp, addStars, markModuleComplete, addGameResult } = useStore();
   const navigate = useNavigate();
   const containerRef = React.useRef(null);
@@ -43,7 +43,7 @@ export const MathQuizModule = () => {
     setSelectedOption(null);
     setStatus('idle');
     setShuffledOptions(shuffleArray(currentQ.options));
-    
+
     if (containerRef.current) {
       containerRef.current.scrollTo(0, 0);
     }
@@ -52,11 +52,11 @@ export const MathQuizModule = () => {
   const handleOptionClick = (option) => {
     if (status !== 'idle') return;
     setSelectedOption(option);
-    
+
     if (option === currentQ.a) {
       setStatus('correct');
       setScore(s => s + 1);
-      playAudio('Correct! You are so smart.');
+      playAudio('Correct!  ');
       setTimeout(() => nextQuestion(), 1500);
     } else {
       setStatus('wrong');
@@ -71,14 +71,14 @@ export const MathQuizModule = () => {
     } else {
       const finalScore = score + 1;
       const timeInSeconds = Math.floor((Date.now() - startTime) / 1000);
-      
+
       addGameResult({
         moduleName: "Math Quiz",
         score: finalScore,
         total: quizPool.length,
         timeInSeconds
       });
-      
+
       addXp(200);
       addStars(3);
       markModuleComplete('math-quiz');
@@ -100,32 +100,34 @@ export const MathQuizModule = () => {
           key={currentIndex}
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="bg-white/90 backdrop-blur-md rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-12 pb-12 md:pb-20 shadow-2xl border-b-[10px] border-brand-purple w-full flex flex-col items-center flex-1 overflow-y-auto lg:overflow-visible"
+          className="bg-white/90 backdrop-blur-md rounded-[2.5rem] md:rounded-[3rem] p-4 md:p-8 pb-8 md:pb-12 shadow-2xl border-b-[10px] border-brand-purple w-full flex flex-col items-center justify-center flex-1 overflow-y-auto lg:overflow-visible"
         >
-          <div className="bg-brand-purple/5 px-6 py-2 rounded-full text-brand-purple font-bold tracking-widest uppercase text-sm mb-6 shrink-0">
-             Math Challenge
+          <div className="bg-brand-purple/5 px-6 py-1 md:py-2 rounded-full text-brand-purple font-bold tracking-widest uppercase text-xs md:text-sm mb-4 md:mb-8 shrink-0">
+            Math Challenge
           </div>
 
-          <div className="text-7xl md:text-[8rem] font-heading text-brand-dark mb-12 drop-shadow-sm shrink-0">
-            {currentQ.q}
+          <div className="flex-1 flex items-center justify-center w-full min-h-[150px] md:min-h-[200px]">
+            <div className="text-6xl md:text-[8rem] font-heading text-brand-dark drop-shadow-sm text-center">
+              {currentQ.q}
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 w-full mt-auto">
+          <div className="grid grid-cols-2 gap-3 md:gap-4 w-full shrink-0">
             {shuffledOptions.map((option, idx) => {
               const isSelected = selectedOption === option;
               const isCorrect = option === currentQ.a;
-              
+
               let buttonVariant = "secondary";
               if (isSelected) {
                 buttonVariant = status === 'correct' && isCorrect ? "success" : "primary";
               }
 
               return (
-                <AnimatedButton 
+                <AnimatedButton
                   key={idx}
                   variant={buttonVariant}
                   className={`
-                    py-8 md:py-10 text-4xl md:text-5xl font-heading
+                    py-5 md:py-8 text-3xl md:text-5xl font-heading
                     ${status === 'wrong' && isSelected ? 'animate-shake' : ''}
                   `}
                   onClick={() => handleOptionClick(option)}
@@ -140,9 +142,9 @@ export const MathQuizModule = () => {
         </motion.div>
       </AnimatePresence>
 
-      <RewardPopup 
-        isOpen={showReward} 
-        onClose={() => navigate('/')} 
+      <RewardPopup
+        isOpen={showReward}
+        onClose={() => navigate('/')}
         message="Vedhanshi is a Math Star!"
         stars={3}
       />
