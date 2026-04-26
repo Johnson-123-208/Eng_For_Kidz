@@ -17,12 +17,16 @@ export const ChallengeModule = () => {
   const [showReward, setShowReward] = useState(false);
   const { addXp, addStars, markModuleComplete } = useStore();
   const navigate = useNavigate();
+  const containerRef = React.useRef(null);
 
   const currentQ = challengeQuiz[currentIndex];
 
   useEffect(() => {
     setSelectedOption(null);
     setStatus('idle');
+    if (containerRef.current) {
+      containerRef.current.scrollTo(0, 0);
+    }
     if (currentQ.questionType === 'hear' || currentQ.questionType === 'missing') {
       setTimeout(() => playAudio(currentQ.word || currentQ.sound), 500);
     }
@@ -135,7 +139,7 @@ export const ChallengeModule = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center p-4 md:p-6 w-full max-w-3xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden">
+    <div ref={containerRef} className="flex-1 flex flex-col items-center p-4 md:p-6 w-full max-w-3xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
       <div className="w-full flex items-center mb-4 md:mb-8 gap-4 shrink-0">
         <Shield className="text-brand-yellow fill-brand-yellow" size={32} />
         <ProgressBar current={currentIndex + 1} total={challengeQuiz.length} color="bg-brand-yellow" />
@@ -184,7 +188,7 @@ export const ChallengeModule = () => {
       <RewardPopup 
         isOpen={showReward} 
         onClose={() => navigate('/')} 
-        message={`Challenge Complete!`}
+        message="Vedhanshi is the Champion!"
         stars={score === challengeQuiz.length ? 3 : score >= challengeQuiz.length - 2 ? 2 : 1}
       />
     </div>

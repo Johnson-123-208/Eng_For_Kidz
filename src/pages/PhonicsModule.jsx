@@ -15,6 +15,13 @@ export const PhonicsModule = () => {
   const [showReward, setShowReward] = useState(false);
   const { addXp, addStars, markModuleComplete } = useStore();
   const navigate = useNavigate();
+  const containerRef = React.useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo(0, 0);
+    }
+  }, [currentIndex]);
 
   const handleNext = () => {
     if (currentIndex < digraphs.length - 1) {
@@ -34,7 +41,7 @@ export const PhonicsModule = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center p-2 md:p-4 w-full max-w-7xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
+    <div ref={containerRef} className="flex-1 flex flex-col items-center p-2 md:p-4 w-full max-w-7xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
       <div className="w-full mb-2 md:mb-4 shrink-0">
         <ProgressBar current={currentIndex + 1} total={digraphs.length} color="bg-brand-purple" />
       </div>
@@ -124,7 +131,7 @@ export const PhonicsModule = () => {
       <RewardPopup 
         isOpen={showReward} 
         onClose={() => navigate('/')} 
-        message="Phonics Master!"
+        message="Vedhanshi is a Master!"
         stars={3}
       />
     </div>

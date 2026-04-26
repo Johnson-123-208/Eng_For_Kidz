@@ -26,7 +26,10 @@ export const Header = () => {
         <div className="bg-brand-yellow text-brand-dark p-2 rounded-xl rotate-6">
           <span className="text-2xl font-heading">C</span>
         </div>
-        {!isHome && <span className="ml-2 font-heading text-xl md:text-2xl text-brand-dark hidden sm:block">Home</span>}
+        <div className="ml-3 flex flex-col">
+          <span className="text-xs font-bold text-brand-purple tracking-widest uppercase opacity-70">Vedhanshi's</span>
+          <span className="font-heading text-xl md:text-2xl text-brand-dark leading-tight">Phonics Fun</span>
+        </div>
       </div>
 
       <div className="flex items-center gap-3 md:gap-6">

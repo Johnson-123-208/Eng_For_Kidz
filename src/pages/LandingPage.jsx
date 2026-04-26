@@ -38,7 +38,7 @@ export const LandingPage = () => {
       description: 'Listen carefully and spell it out.',
       icon: <Headphones className="text-white" size={40} />,
       color: 'bg-brand-blue',
-      isLocked: xp < 100 && !completedModules.includes('alphabets'), // unlock condition example
+      isLocked: false,
       path: '/module/hear-type',
       stars: completedModules.includes('hear-type') ? 3 : 0,
     },
@@ -48,7 +48,7 @@ export const LandingPage = () => {
       description: 'Drag and drop letters to win!',
       icon: <Type className="text-white" size={40} />,
       color: 'bg-brand-green',
-      isLocked: xp < 200,
+      isLocked: false,
       path: '/module/spell-builder',
       stars: completedModules.includes('spell-builder') ? 3 : 0,
     },
@@ -58,7 +58,7 @@ export const LandingPage = () => {
       description: 'Test your skills in a timed quiz.',
       icon: <Shield className="text-white" size={40} />,
       color: 'bg-brand-yellow',
-      isLocked: xp < 300,
+      isLocked: false,
       path: '/module/challenge',
       stars: completedModules.includes('challenge') ? 3 : 0,
     }
@@ -71,13 +71,19 @@ export const LandingPage = () => {
         animate={{ y: 0, opacity: 1 }}
         className="text-center my-8"
       >
-        <h1 className="text-5xl md:text-6xl text-brand-purple drop-shadow-md mb-4 flex items-center justify-center gap-4">
-          <span className="inline-block animate-bounce">👋</span> 
-          Welcome to Phonics Fun!
+        <h1 className="text-5xl md:text-6xl text-brand-purple drop-shadow-md mb-4 flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+          <div className="flex items-center gap-4">
+            <span className="inline-block animate-bounce">👋</span> 
+            Hi Vedhanshi!
+          </div>
         </h1>
-        <p className="text-xl md:text-2xl text-brand-dark/70 font-medium">
+        <p className="text-xl md:text-2xl text-brand-dark/70 font-medium max-w-2xl mx-auto leading-relaxed">
+          Welcome to your magic phonics fun! <br className="hidden md:block" />
           Choose a game below to start playing and learning!
         </p>
+        <div className="mt-4 text-brand-red font-heading italic opacity-80">
+          Created with love by your brother ❤️
+        </div>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl pb-16">

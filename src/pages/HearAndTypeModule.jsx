@@ -17,16 +17,20 @@ export const HearAndTypeModule = () => {
   const inputRef = useRef(null);
   const { addXp, addStars, markModuleComplete } = useStore();
   const navigate = useNavigate();
-
-  const currentItem = simpleWords[currentIndex];
+  const containerRef = React.useRef(null);
 
   useEffect(() => {
     // Play audio when mounting or changing word
+    if (containerRef.current) {
+      containerRef.current.scrollTo(0, 0);
+    }
     setTimeout(() => playAudio(currentItem.word), 500);
     if (inputRef.current) inputRef.current.focus();
     setInputValue('');
     setStatus('idle');
   }, [currentIndex]);
+
+  const currentItem = simpleWords[currentIndex];
 
   const handleCheck = () => {
     if (inputValue.toLowerCase().trim() === currentItem.word.toLowerCase()) {
@@ -56,7 +60,7 @@ export const HearAndTypeModule = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center p-4 md:p-6 w-full max-w-2xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
+    <div ref={containerRef} className="flex-1 flex flex-col items-center p-4 md:p-6 w-full max-w-2xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
       <div className="w-full mb-4 md:mb-8 shrink-0">
         <ProgressBar current={currentIndex + 1} total={simpleWords.length} color="bg-brand-blue" />
       </div>
@@ -136,7 +140,7 @@ export const HearAndTypeModule = () => {
       <RewardPopup 
         isOpen={showReward} 
         onClose={() => navigate('/')} 
-        message="Perfect Spelling!"
+        message="Well done Vedhanshi!"
         stars={3}
       />
     </div>
