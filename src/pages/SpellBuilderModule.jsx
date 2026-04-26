@@ -85,13 +85,13 @@ export const SpellBuilderModule = () => {
   if (!currentItem) return null;
 
   return (
-    <div ref={containerRef} className="flex-1 flex flex-col items-center p-4 md:p-6 w-full max-w-4xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
-      <div className="w-full mb-4 md:mb-8 shrink-0">
+    <div ref={containerRef} className="flex-1 flex flex-col items-center p-1 md:p-6 w-full max-w-4xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
+      <div className="w-full mb-2 md:mb-8 shrink-0 px-2">
         <ProgressBar current={currentIndex + 1} total={wordPool.length} color="bg-brand-green" />
       </div>
 
       <motion.div
-        className="bg-white/90 backdrop-blur-md rounded-[3rem] p-4 md:p-8 pb-12 shadow-2xl border-b-[10px] border-brand-green w-full flex flex-col items-center flex-1 overflow-y-auto lg:overflow-visible"
+        className="bg-white/90 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-3 md:p-8 pb-6 md:pb-12 shadow-2xl border-b-[10px] border-brand-green w-full flex flex-col items-center flex-1 overflow-y-auto lg:overflow-visible"
       >
         <div className="text-6xl md:text-8xl mb-4 md:mb-6 bg-brand-green/10 p-6 rounded-full shrink-0">
           {currentItem.hint}

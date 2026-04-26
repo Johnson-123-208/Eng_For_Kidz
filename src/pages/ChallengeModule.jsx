@@ -173,8 +173,8 @@ export const ChallengeModule = () => {
   };
 
   return (
-    <div ref={containerRef} className="flex-1 flex flex-col items-center p-4 md:p-6 w-full max-w-3xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
-      <div className="w-full flex items-center mb-4 md:mb-8 gap-4 shrink-0">
+    <div ref={containerRef} className="flex-1 flex flex-col items-center p-1 md:p-6 w-full max-w-3xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
+      <div className="w-full flex items-center mb-2 md:mb-8 gap-4 shrink-0 px-2">
         <Shield className="text-brand-yellow fill-brand-yellow" size={32} />
         <ProgressBar current={currentIndex + 1} total={quizPool.length} color="bg-brand-yellow" />
       </div>
@@ -185,7 +185,7 @@ export const ChallengeModule = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 1.1, opacity: 0 }}
-          className="bg-white/90 backdrop-blur-md rounded-[3rem] p-6 md:p-8 pb-12 shadow-2xl border-b-[10px] border-brand-yellow w-full flex flex-col items-center flex-1 overflow-y-auto lg:overflow-visible"
+          className="bg-white/90 backdrop-blur-md rounded-[2rem] p-4 md:p-8 pb-8 md:pb-12 shadow-2xl border-b-[10px] border-brand-yellow w-full flex flex-col items-center flex-1 overflow-y-auto lg:overflow-visible"
         >
           {renderQuestionHeader()}
 

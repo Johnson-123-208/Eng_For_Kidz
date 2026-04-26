@@ -27,7 +27,7 @@ export const Header = () => {
         <div className="bg-brand-yellow text-brand-dark p-2 rounded-xl rotate-6">
           <span className="text-2xl font-heading">C</span>
         </div>
-        <div className="ml-3 flex flex-col">
+        <div className="ml-3 hidden md:flex flex-col">
           <span className="text-xs font-bold text-brand-purple tracking-widest uppercase opacity-70">Vedhanshi's</span>
           <span className="font-heading text-xl md:text-2xl text-brand-dark leading-tight">Phonics Fun</span>
         </div>
@@ -39,14 +39,14 @@ export const Header = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => navigate('/stats')}
-            className="flex items-center gap-1 bg-white px-3 py-1.5 rounded-full shadow-sm border border-brand-purple/30 group"
+            className="hidden md:flex items-center gap-1 bg-white px-3 py-1.5 rounded-full shadow-sm border border-brand-purple/30 group"
           >
             <BarChart3 className="text-brand-purple group-hover:scale-110 transition-transform" size={20} />
-            <span className="font-bold text-brand-dark hidden sm:inline">Stats</span>
+            <span className="font-bold text-brand-dark">Stats</span>
           </motion.button>
         )}
         
-        <motion.div whileHover={{ scale: 1.1 }} className="flex items-center gap-1 bg-white px-3 py-1.5 rounded-full shadow-sm border border-brand-yellow/30">
+        <motion.div whileHover={{ scale: 1.1 }} className="hidden md:flex items-center gap-1 bg-white px-3 py-1.5 rounded-full shadow-sm border border-brand-yellow/30">
           <Star className="text-brand-yellow fill-brand-yellow" size={20} />
           <span className="font-bold text-brand-dark">{stars}</span>
         </motion.div>

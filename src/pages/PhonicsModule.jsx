@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { digraphs } from '../data/dummyData';
 import { WordCard } from '../components/WordCard';
@@ -10,7 +10,17 @@ import { playAudio } from '../utils/audio';
 import { ArrowLeft, ArrowRight, Volume2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+const shuffleArray = (array) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 export const PhonicsModule = () => {
+  const [soundPool, setSoundPool] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showReward, setShowReward] = useState(false);
   const [startTime] = useState(Date.now());
@@ -19,20 +29,24 @@ export const PhonicsModule = () => {
   const containerRef = React.useRef(null);
 
   useEffect(() => {
+    setSoundPool(shuffleArray(digraphs));
+  }, []);
+
+  useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTo(0, 0);
     }
   }, [currentIndex]);
 
   const handleNext = () => {
-    if (currentIndex < digraphs.length - 1) {
+    if (currentIndex < soundPool.length - 1) {
       setCurrentIndex(prev => prev + 1);
     } else {
       const timeInSeconds = Math.floor((Date.now() - startTime) / 1000);
       addGameResult({
         moduleName: "Magic Phonics",
-        score: digraphs.length,
-        total: digraphs.length,
+        score: soundPool.length,
+        total: soundPool.length,
         timeInSeconds
       });
       
@@ -43,16 +57,18 @@ export const PhonicsModule = () => {
     }
   };
 
-  const currentItem = digraphs[currentIndex];
+  const currentItem = soundPool[currentIndex];
+
+  if (!currentItem) return null;
 
   const handlePlaySound = () => {
     playAudio(currentItem.letters);
   };
 
   return (
-    <div ref={containerRef} className="flex-1 flex flex-col items-center p-2 md:p-4 w-full max-w-7xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
-      <div className="w-full mb-2 md:mb-4 shrink-0">
-        <ProgressBar current={currentIndex + 1} total={digraphs.length} color="bg-brand-purple" />
+    <div ref={containerRef} className="flex-1 flex flex-col items-center p-1 md:p-4 w-full max-w-7xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
+      <div className="w-full mb-1 md:mb-4 shrink-0 px-2">
+        <ProgressBar current={currentIndex + 1} total={soundPool.length} color="bg-brand-purple" />
       </div>
 
       <AnimatePresence mode="wait">
@@ -61,7 +77,7 @@ export const PhonicsModule = () => {
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -50, opacity: 0 }}
-          className="bg-white/90 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-4 md:p-8 shadow-2xl border-b-8 border-brand-purple w-full flex flex-col lg:flex-1 overflow-y-auto lg:overflow-visible"
+          className="bg-white/90 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-3 md:p-8 shadow-2xl border-b-8 border-brand-purple w-full flex flex-col lg:flex-1 overflow-y-auto lg:overflow-visible"
         >
           <div className="flex flex-col xl:flex-row items-center justify-between gap-4 xl:gap-8 w-full lg:flex-1">
             
@@ -130,7 +146,7 @@ export const PhonicsModule = () => {
               className="flex-1 flex justify-center items-center gap-2 text-lg md:text-xl py-3 md:py-4"
               onClick={handleNext}
             >
-              {currentIndex === digraphs.length - 1 ? 'Mastered!' : 'Next Sound'} 
+              {currentIndex === soundPool.length - 1 ? 'Mastered!' : 'Next Sound'} 
               <ArrowRight size={24} className="md:w-7 md:h-7" />
             </AnimatedButton>
           </div>

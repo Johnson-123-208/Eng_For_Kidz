@@ -11,12 +11,7 @@ import { StatsPage } from './pages/StatsPage';
 
 const AppLayout = () => {
   return (
-    <div className="min-h-screen bg-brand-blue/5 font-sans flex flex-col relative overflow-hidden">
-      {/* Decorative background bubbles */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-brand-yellow/20 rounded-full blur-xl -z-10"></div>
-      <div className="absolute bottom-10 right-10 w-64 h-64 bg-brand-purple/20 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-brand-green/20 rounded-full blur-2xl -z-10"></div>
-      
+    <div className="min-h-screen font-sans flex flex-col relative overflow-hidden">
       <Header />
       <Outlet />
     </div>
