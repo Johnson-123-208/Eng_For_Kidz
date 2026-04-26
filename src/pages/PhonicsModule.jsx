@@ -34,8 +34,8 @@ export const PhonicsModule = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center p-2 md:p-4 w-full max-w-7xl mx-auto h-full max-h-screen">
-      <div className="w-full mb-2 md:mb-4">
+    <div className="flex-1 flex flex-col items-center p-2 md:p-4 w-full max-w-7xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
+      <div className="w-full mb-2 md:mb-4 shrink-0">
         <ProgressBar current={currentIndex + 1} total={digraphs.length} color="bg-brand-purple" />
       </div>
 
@@ -45,9 +45,9 @@ export const PhonicsModule = () => {
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -50, opacity: 0 }}
-          className="bg-white/90 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-4 md:p-8 shadow-2xl border-b-8 border-brand-purple w-full flex flex-col flex-1"
+          className="bg-white/90 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-4 md:p-8 shadow-2xl border-b-8 border-brand-purple w-full flex flex-col lg:flex-1 overflow-y-auto lg:overflow-visible"
         >
-          <div className="flex flex-col xl:flex-row items-center justify-between gap-4 xl:gap-8 w-full flex-1">
+          <div className="flex flex-col xl:flex-row items-center justify-between gap-4 xl:gap-8 w-full lg:flex-1">
             
             {/* Left Half: The Sound target */}
             <div className="w-full xl:w-1/3 flex flex-col items-center justify-center shrink-0">

@@ -56,13 +56,13 @@ export const HearAndTypeModule = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center p-6 w-full max-w-2xl mx-auto">
-      <div className="w-full mb-6 md:mb-8">
+    <div className="flex-1 flex flex-col items-center p-4 md:p-6 w-full max-w-2xl mx-auto min-h-screen lg:h-screen lg:overflow-hidden overflow-y-auto">
+      <div className="w-full mb-4 md:mb-8 shrink-0">
         <ProgressBar current={currentIndex + 1} total={simpleWords.length} color="bg-brand-blue" />
       </div>
 
       <motion.div
-        className="bg-white/90 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-6 md:p-8 pb-8 md:pb-12 shadow-2xl border-b-[8px] md:border-b-[10px] border-brand-blue w-full flex flex-col items-center"
+        className="bg-white/90 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-4 md:p-8 pb-8 md:pb-12 shadow-2xl border-b-[8px] md:border-b-[10px] border-brand-blue w-full flex flex-col items-center flex-1 overflow-y-auto lg:overflow-visible"
       >
         <div className="flex justify-between w-full mb-6">
           <button 
